@@ -51,5 +51,10 @@ namespace Algorithm_Visualizer
             ISortable bubbleSort = new BubbleSort();
             bubbleSort.RunBubbleSort(arrayToSort, graphics, panel1.Height);
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Method for the drop down selection. Values are typed in as a collection from the properties box.
+        }
     }
 }
