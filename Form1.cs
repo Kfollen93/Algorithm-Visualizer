@@ -41,14 +41,15 @@ namespace Algorithm_Visualizer
 
             for (int i = 0; i < numEntries; i++)
             {
-                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 1, maxVal);
+                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 10, maxVal);
             }
 
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-
+            ISortable bubbleSort = new BubbleSort();
+            bubbleSort.RunBubbleSort(arrayToSort, graphics, panel1.Height);
         }
     }
 }
