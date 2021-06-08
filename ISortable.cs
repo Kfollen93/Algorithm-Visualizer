@@ -9,6 +9,8 @@ namespace Algorithm_Visualizer
 {
     interface ISortable
     {
-        void RunBubbleSort(int[] arrayToSort, Graphics graphics, int maxVal);
+        void NextStep();
+        bool IsSorted();
+        void ReDraw();
     }
 }
