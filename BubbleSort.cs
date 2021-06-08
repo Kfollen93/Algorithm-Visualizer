@@ -41,13 +41,16 @@ namespace Algorithm_Visualizer
             arrayToSort[i] = arrayToSort[i + 1];
             arrayToSort[i + 1] = temp;
 
-            // Background color when sorting starts
-            graphics.FillRectangle(black, i, 0, 1, maxVal);
-            graphics.FillRectangle(yellow, adjacentVal, 0, 1, maxVal);
+            DrawBar(i, arrayToSort[i]);
+            DrawBar(adjacentVal, arrayToSort[adjacentVal]);
+        }
 
-
-            graphics.FillRectangle(yellow, i, maxVal - arrayToSort[i], 1, maxVal);
-            graphics.FillRectangle(red, adjacentVal, maxVal - arrayToSort[adjacentVal], 1, maxVal);
+        private void DrawBar(int position, int height)
+        {
+            // Black background
+            graphics.FillRectangle(black, position, 0, 1, maxVal);
+            // Height in white for bars
+            graphics.FillRectangle(red, position, maxVal - arrayToSort[position], 1, maxVal);
         }
 
         public bool IsSorted()
