@@ -5,19 +5,43 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Algorithm_Visualizer
 {
     public partial class Form1 : Form
     {
-        int[] arrayToSort;
-        Graphics graphics;
+        private int[] arrayToSort;
+        private Graphics graphics;
+        private BackgroundWorker backgroundWorker = null;
 
         public Form1()
         {
             InitializeComponent();
+            PopulateDropMenu();
+        }
+
+        private void PopulateDropMenu()
+        {
+            List<string> algorithmList = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                .Where(x => typeof(ISortable).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+                .Select(x => x.Name).ToList();
+
+            algorithmList.Sort();
+            foreach (string algorithmName in algorithmList)
+            {
+                comboBox1.Items.Add(algorithmName);
+            }
+
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            backgroundWorker.RunWorkerAsync(argument: comboBox1.SelectedItem);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -28,7 +52,7 @@ namespace Algorithm_Visualizer
         private void btnReset_Click(object sender, EventArgs e)
         {
             graphics = panel1.CreateGraphics();
-            int numEntries = panel1.Width;
+            int numEntries = 500;
             int maxVal = panel1.Height;
             arrayToSort = new int[numEntries];
             graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, numEntries, maxVal);
@@ -41,20 +65,24 @@ namespace Algorithm_Visualizer
 
             for (int i = 0; i < numEntries; i++)
             {
-                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 10, maxVal);
+                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 2, maxVal);
             }
 
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        // Background Worker
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ISortable bubbleSort = new BubbleSort();
-            bubbleSort.RunBubbleSort(arrayToSort, graphics, panel1.Height);
-        }
+            BackgroundWorker backgroundWorker = sender as BackgroundWorker;
+            string sortEngineName = (string)e.Argument;
+            Type type = Type.GetType("Algorithm_Visualizer. " + sortEngineName);
+            var constructors = type.GetConstructors();
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Method for the drop down selection. Values are typed in as a collection from the properties box.
+            ISortable sortable = (ISortable)constructors[0].Invoke(new object[] { arrayToSort, graphics, panel1.Height });
+            while (!sortable.IsSorted() && (!backgroundWorker.CancellationPending))
+            {
+                sortable.NextStep();
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Algorithm_Visualizer
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1448, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +91,6 @@ namespace Algorithm_Visualizer
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(202, 21);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -109,9 +108,9 @@ namespace Algorithm_Visualizer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(89, 137);
+            this.panel1.Location = new System.Drawing.Point(101, 185);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1185, 510);
+            this.panel1.Size = new System.Drawing.Size(500, 116);
             this.panel1.TabIndex = 4;
             // 
             // button2
@@ -128,7 +127,7 @@ namespace Algorithm_Visualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1448, 690);
+            this.ClientSize = new System.Drawing.Size(702, 440);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
