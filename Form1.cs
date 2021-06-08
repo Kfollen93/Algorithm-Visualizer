@@ -75,11 +75,11 @@ namespace Algorithm_Visualizer
         {
             BackgroundWorker backgroundWorker = sender as BackgroundWorker;
             string sortEngineName = (string)e.Argument;
-            Type type = Type.GetType("Algorithm_Visualizer. " + sortEngineName);
+            Type type = Type.GetType("Algorithm_Visualizer." + sortEngineName);
             var constructors = type.GetConstructors();
 
-            ISortable sortable = (ISortable)constructors[0].Invoke(new object[] { arrayToSort, graphics, panel1.Height });
-            while (!sortable.IsSorted() && (!backgroundWorker.CancellationPending))
+            ISortable sortable = (ISortable)constructors[0].Invoke(new object[] {arrayToSort, graphics, panel1.Height});
+            while (!sortable.IsSorted())
             {
                 sortable.NextStep();
             }
