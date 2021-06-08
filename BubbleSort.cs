@@ -3,36 +3,35 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithm_Visualizer
 {
     class BubbleSort : ISortable
     {
-        private bool isSorted = false;
         private int[] arrayToSort;
         private Graphics graphics;
         private int maxVal;
         private Brush white = new SolidBrush(Color.White);
         private Brush black = new SolidBrush(Color.Black);
+        private Brush red = new SolidBrush(Color.Red);
+        private Brush yellow = new SolidBrush(Color.Yellow);
+        private Brush green = new SolidBrush(Color.Green);
 
-        public void RunBubbleSort(int[] _arrayToSort, Graphics _graphics, int _maxVal)
+        public BubbleSort(int[] _arrayToSort, Graphics _graphics, int _maxVal)
         {
             arrayToSort = _arrayToSort;
             graphics = _graphics;
             maxVal = _maxVal;
+        }
 
-            while (!isSorted)
+        public void NextStep()
+        {
+            for(int i = 0; i < arrayToSort.Count() - 1; i++)
             {
-                for(int i = 0; i < arrayToSort.Count() - 1; i++)
+                if (arrayToSort[i] > arrayToSort[i + 1])
                 {
-                    if (arrayToSort[i] > arrayToSort[i + 1])
-                    {
-                        Swap(i, i + 1);
-                    }
+                    Swap(i, i + 1);
                 }
-
-                isSorted = IsArraySorted();
             }
         }
 
@@ -42,14 +41,16 @@ namespace Algorithm_Visualizer
             arrayToSort[i] = arrayToSort[i + 1];
             arrayToSort[i + 1] = temp;
 
+            // Background color when sorting starts
             graphics.FillRectangle(black, i, 0, 1, maxVal);
-            graphics.FillRectangle(black, adjacentVal, 0, 1, maxVal);
+            graphics.FillRectangle(yellow, adjacentVal, 0, 1, maxVal);
 
-            graphics.FillRectangle(white, i, maxVal - arrayToSort[i], 1, maxVal);
-            graphics.FillRectangle(white, adjacentVal, maxVal - arrayToSort[adjacentVal], 1, maxVal);
+
+            graphics.FillRectangle(yellow, i, maxVal - arrayToSort[i], 1, maxVal);
+            graphics.FillRectangle(red, adjacentVal, maxVal - arrayToSort[adjacentVal], 1, maxVal);
         }
 
-        private bool IsArraySorted()
+        public bool IsSorted()
         {
             for (int i = 0; i < arrayToSort.Count() - 1; i++)
             {
@@ -59,6 +60,14 @@ namespace Algorithm_Visualizer
                 }
             }
             return true;
+        }
+
+        public void ReDraw()
+        {
+            for(int i = 0; i < (arrayToSort.Count() - 1); i++)
+            {
+                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 1, maxVal);
+            }
         }
     }
 }
