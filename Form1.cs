@@ -61,19 +61,18 @@ namespace Algorithm_Visualizer
             int numEntries = 500;
             int maxVal = panel1.Height;
             arrayToSort = new int[numEntries];
-            graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, numEntries, maxVal);
+            graphics.FillRectangle(new SolidBrush(Color.Green), 0, 0, numEntries, maxVal);
             Random random = new Random();
 
-            for(int i = 0; i < numEntries; i++)
+            for (int i = 0; i < numEntries; i++)
             {
                 arrayToSort[i] = random.Next(0, maxVal);
             }
 
             for (int i = 0; i < numEntries; i++)
             {
-                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 2, maxVal);
+                graphics.FillRectangle(new SolidBrush(Color.Yellow), i, maxVal - arrayToSort[i], 1, maxVal);
             }
-
         }
 
         // Background Worker
