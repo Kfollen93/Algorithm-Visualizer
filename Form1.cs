@@ -38,6 +38,12 @@ namespace Algorithm_Visualizer
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            // If user clicks start without resetting the array first, then make start button reset array
+            if (arrayToSort == null)
+            {
+                btnReset_Click(sender, e);
+            }
+
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
