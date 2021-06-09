@@ -47,10 +47,10 @@ namespace Algorithm_Visualizer
 
         private void DrawBar(int position, int height)
         {
-            // Black background
+            // Background color
             graphics.FillRectangle(black, position, 0, 1, maxVal);
-            // Height in white for bars
-            graphics.FillRectangle(red, position, maxVal - arrayToSort[position], 1, maxVal);
+            // Color of bars
+            graphics.FillRectangle(white, position, maxVal - arrayToSort[position], 2, maxVal);
         }
 
         public bool IsSorted()
@@ -69,7 +69,7 @@ namespace Algorithm_Visualizer
         {
             for(int i = 0; i < (arrayToSort.Count() - 1); i++)
             {
-                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 1, maxVal);
+                graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 2, maxVal);
             }
         }
     }
