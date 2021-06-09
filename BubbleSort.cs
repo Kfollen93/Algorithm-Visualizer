@@ -11,9 +11,6 @@ namespace Algorithm_Visualizer
         private int[] arrayToSort;
         private Graphics graphics;
         private int maxVal;
-        private Brush white = new SolidBrush(Color.White);
-        private Brush black = new SolidBrush(Color.Black);
-        private Brush red = new SolidBrush(Color.Red);
         private Brush yellow = new SolidBrush(Color.Yellow);
         private Brush green = new SolidBrush(Color.Green);
 
@@ -26,7 +23,7 @@ namespace Algorithm_Visualizer
 
         public void NextStep()
         {
-            for(int i = 0; i < arrayToSort.Count() - 1; i++)
+            for (int i = 0; i < arrayToSort.Count() - 1; i++)
             {
                 if (arrayToSort[i] > arrayToSort[i + 1])
                 {
@@ -48,9 +45,9 @@ namespace Algorithm_Visualizer
         private void DrawBar(int position, int height)
         {
             // Background color
-            graphics.FillRectangle(black, position, 0, 1, maxVal);
+            graphics.FillRectangle(green, position, 0, 1, maxVal);
             // Color of bars
-            graphics.FillRectangle(white, position, maxVal - arrayToSort[position], 2, maxVal);
+            graphics.FillRectangle(yellow, position, maxVal - arrayToSort[position], 2, maxVal);
         }
 
         public bool IsSorted()
@@ -67,7 +64,7 @@ namespace Algorithm_Visualizer
 
         public void ReDraw()
         {
-            for(int i = 0; i < (arrayToSort.Count() - 1); i++)
+            for (int i = 0; i < (arrayToSort.Count() - 1); i++)
             {
                 graphics.FillRectangle(new SolidBrush(Color.White), i, maxVal - arrayToSort[i], 2, maxVal);
             }
